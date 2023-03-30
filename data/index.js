@@ -1,13 +1,13 @@
-import pg from "pg";
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const databaseUrl = process.env.DATABASE_URL;
-
-if (undefined === databaseUrl) {
-  throw new Error(
-    "Your database URL is undefined. Please fix this bug before continuing"
-  );
-}
-
-export const pool = new pg.Pool({
-  connectionString: databaseUrl,
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_CONNECTION_URL,
 });
+
+module.exports = {
+    query: function (text, params) {
+        return pool.query(text, params);
+          },
+  pool : pool
+};

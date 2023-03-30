@@ -17,20 +17,21 @@ export async function getAllMatchingCandidates(job) {
   return candidates;
 }
 
-export async function updateJobDatabase(job) {
-  const sqlQuery =
-    "INSERT INTO jobs (company_name, start_date, end_date, Java, AWS, JavaScript, Python, SQL) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;";
-  const parameterValues = [
-    job.company_name,
-    job.start_date,
-    job.end_date,
-    job.java,
-    job.AWS,
-    job.JavaScript,
-    job.Python,
-    job.SQL,
-  ];
-  const result = await pool.query(sqlQuery, parameterValues);
-  const created = result.rows[0];
-  return created;
+//create a candidate
+export async function createCandidate(newCandidate) {
+    const result = await query(`INSERT INTO "public"."candidates" 
+    (first_name, last_name, start_date, end_date, Java, AWS, JavaScript, Python, SQL)
+    values ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+    [newCandidate.first_name, newCandidate.last_name, newCandidate.start_date, newCandidate.end_date, newCandidate.Java, newCandidate.AWS, newCandidate.JavaScript, newCandidate.Python, newCandidate.SQL]
+    );
+    return result.rows;
+}
+
+//get candidate by id
+export async function GetCandidateById(id) {
+    const result = await query(`SELECT * 
+    FROM "public"."candidates" 
+    WHERE id = $1`, [id]);
+    const candidate = result.rows[0];
+    return candidate;
 }
