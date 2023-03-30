@@ -1,15 +1,10 @@
-const { Pool } = require("pg");
-if (process.env.POSTGRES_CONNECTION_URL === undefined) {
-  console.log("POSTGRES_CONNECTION_URL is undefined")
-}
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_CONNECTION_URL,
+export const pool = new Pool({
+    connectionString: process.env.POSTGRESQL_CONNECTION_URL,
 });
 
-module.exports = {
-    query: function (text, params) {
-        return pool.query(text, params);
-          },
-  pool : pool
-};
+export function query(text, params) {
+    return pool.query(text, params)
+}

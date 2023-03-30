@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from "morgan";
 import cors from 'cors';
-import matchRouter from './routes/matchRouter'
+import matchRouter from "./routes/matchRouter.js"
 
 const app = express();
 

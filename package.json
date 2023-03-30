@@ -8,7 +8,8 @@
     "pg": "^8.10.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node -r dotenv/config server.js",    
+    "dev": "nodemon -r dotenv/config --experimental-modules server.js"
   },
   "name": "hackathon-thurdsay-backend",
   "description": "",
@@ -16,5 +17,6 @@
   "main": "app.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "module"
 }
