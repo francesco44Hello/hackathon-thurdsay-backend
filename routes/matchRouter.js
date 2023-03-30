@@ -3,30 +3,29 @@ import express from express
 const matchRouter = express.Router()
 
 import {
-    getAllMatches,
-    createMatch,
-    GetMatchById
+    getAllMatcheingCandiates,
+    GetCandidateById,
+    createCandidate
 } from "./models/matchModels.js"
 
 matchRouter.get('/', async function (req, res
 ) {
-    const allMatches = await getAllMatches()
-    res.status(200).json(allMatches)
-    res.json(matches)
+    const allCandidates = await getAllMatcheingCandiates()
+    res.status(200).json(allCandidates)
+    res.json(allCandidates)
 })
 
 // get match by id
 matchRouter.get('/:id', async function (req, res) {
-    const match = await GetMatchById(req.params.id)
+    const match = await GetCandidateById(req.params.id)
     res.status(200).json(match)
     res.json({success: true, payload: match})
 })
 
 //create a match
 matchRouter.post('/', async function (req, res) {
-    const newMatch = req.body
-    const result = await createMatch(newMatch)
-    res.status(201).json(newMatch)
+    const newCandidate = req.body
+    const result = await createCandidate(newCandidate)
+    res.status(200).json(result)
 })
-
 export default matchRouter
