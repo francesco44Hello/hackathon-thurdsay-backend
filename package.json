@@ -20,6 +20,5 @@
   "main": "app.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC",
-  "type": "module"
+  "license": "ISC"
 }
