@@ -1,15 +1,13 @@
-const { Pool } = require("pg");
-if (process.env.POSTGRES_CONNECTION_URL === undefined) {
-  console.log("POSTGRES_CONNECTION_URL is undefined")
+import pg from "pg";
+
+const databaseUrl = process.env.DATABASE_URL;
+
+if (undefined === databaseUrl) {
+  throw new Error(
+    "Your database URL is undefined. Please fix this bug before continuing"
+  );
 }
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_CONNECTION_URL,
+export const pool = new pg.Pool({
+  connectionString: databaseUrl,
 });
-
-module.exports = {
-    query: function (text, params) {
-        return pool.query(text, params);
-          },
-  pool : pool
-};
