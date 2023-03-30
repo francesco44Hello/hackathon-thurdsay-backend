@@ -1,4 +1,13 @@
-import { pool } from "../data/index.js";
+import { query } from "../data/index.js";
+
+//get all candidates
+
+export async function getAllCandidates() {
+    const result = await query(`SELECT * FROM candidates`);
+    const allCandidates = result.rows;
+    return allCandidates;
+}
+
 
 export async function getAllMatchingCandidates(job) {
   const sqlQuery =
